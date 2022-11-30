@@ -1,0 +1,2 @@
+modules/projen/*
+!modules/projen/README.md
