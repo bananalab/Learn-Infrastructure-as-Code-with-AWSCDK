@@ -1,0 +1,17 @@
+{
+  "customizations": {
+      "vscode": {
+          "extensions": [
+              "amazonwebservices.aws-toolkit-vscode",
+              "ms-python.python"
+          ],
+          "settings": {
+            "terminal.integrated.defaultProfile.linux": "zsh"
+          }
+      }
+  },
+  "features": {
+      "ghcr.io/bananalab/devcontainer-features/aws-cli:latest": {}
+  },
+  "image": "mcr.microsoft.com/devcontainers/universal:2"
+}
