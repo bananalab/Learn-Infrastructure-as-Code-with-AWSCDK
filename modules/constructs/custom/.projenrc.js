@@ -4,11 +4,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: '39421615+rojopolis@users.noreply.github.com',
   cdkVersion: '2.1.0',
   defaultReleaseBranch: 'main',
-  name: 'simple',
+  name: 'custom',
   repositoryUrl: 'https://github.com/bananalab/Learn-Infrastructure-as-Code-with-AWSCDK.git',
   publishToPypi: {
-    distName: 'rojopolis-simple-construct',
-    module: 'simple',
+    distName: 'rojopolis-custom-construct',
+    module: 'custom',
   },
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
