@@ -1,1 +1,3 @@
-# replace this
+# Full stack example
+
+![solution](diagram.png "Solution")

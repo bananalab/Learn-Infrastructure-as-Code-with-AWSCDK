@@ -13,6 +13,9 @@ class MyStack(Stack):
   def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
     super().__init__(scope, construct_id, **kwargs)
 
+    host = "my-app"
+    domain = "bananalab.dev"
+
     vpc = ec2.Vpc(self, "Vpc",
       ip_addresses=ec2.IpAddresses.cidr("10.0.0.0/16")
     )
@@ -22,9 +25,11 @@ class MyStack(Stack):
       network_mode=NetworkMode.HOST
     )
 
-    cluster = ecs.Cluster(self, "FargateCluster", vpc=vpc)
+    cluster = ecs.Cluster(self, "FargateCluster",
+      vpc=vpc
+    )
 
-    task_definition = ecs.FargateTaskDefinition(self, "TD",
+    task_definition = ecs.FargateTaskDefinition(self, "TaskDefinition",
         memory_limit_mib=512,
         cpu=256
     )
@@ -41,35 +46,45 @@ class MyStack(Stack):
         ]
     )
 
-    service = ecs.FargateService(self, "Service", cluster=cluster, task_definition=task_definition)
+    service = ecs.FargateService(self, "Service",
+      cluster=cluster,
+      task_definition=task_definition
+    )
 
     zone = route53.HostedZone.from_lookup(self, "DNSZone",
-      domain_name="bananalab.dev"
+      domain_name=domain
     )
 
-    domain_cert = acm.Certificate(self, "domainCert",
-        domain_name="my-app.bananalab.dev",
-        validation=acm.CertificateValidation.from_dns(zone)
+    domain_cert = acm.Certificate(self, "Cert",
+      domain_name=f"{host}.{domain}",
+      validation=acm.CertificateValidation.from_dns(zone)
     )
 
-    alb = elbv2.ApplicationLoadBalancer(self, "LB", vpc=vpc, internet_facing=True)
+    alb = elbv2.ApplicationLoadBalancer(self, "ALB",
+      vpc=vpc,
+      internet_facing=True
+    )
 
     listener = alb.add_listener("Listener", port=443,
-        certificates=[domain_cert]
+      certificates=[domain_cert]
     )
 
-    service.register_load_balancer_targets(ecs.EcsTarget(
+    service.register_load_balancer_targets(
+      ecs.EcsTarget(
         container_name="web",
         container_port=80,
         new_target_group_id="ECS",
-        listener=ecs.ListenerConfig.application_listener(listener,
+        listener=ecs.ListenerConfig.application_listener(
+            listener,
             protocol=elbv2.ApplicationProtocol.HTTP
         )
       )
     )
 
     route53.ARecord(self, "AliasRecord",
-        zone=zone,
-        target=route53.RecordTarget.from_alias(targets.LoadBalancerTarget(alb)),
-        record_name="my-app"
+      zone=zone,
+      target=route53.RecordTarget.from_alias(
+          targets.LoadBalancerTarget(alb)
+        ),
+        record_name=host
     )

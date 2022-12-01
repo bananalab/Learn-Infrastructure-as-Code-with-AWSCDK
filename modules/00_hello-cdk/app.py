@@ -12,6 +12,4 @@ app = App()
 MyStack(app, "hello-cdk-dev", env=dev_env)
 # MyStack(app, "hello-cdk-prod", env=prod_env)
 
-print("Hello CDK.")
-
 app.synth()

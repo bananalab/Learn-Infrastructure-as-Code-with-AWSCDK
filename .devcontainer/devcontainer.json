@@ -11,7 +11,8 @@
       }
   },
   "features": {
-      "ghcr.io/bananalab/devcontainer-features/aws-cli:latest": {}
+      "ghcr.io/bananalab/devcontainer-features/aws-cli:latest": {},
+      "ghcr.io/bananalab/devcontainer-features/direnv:latest": {}
   },
   "image": "mcr.microsoft.com/devcontainers/universal:2"
 }
