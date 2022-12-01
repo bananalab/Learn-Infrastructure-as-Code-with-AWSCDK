@@ -3,11 +3,11 @@ Projen is a project generator created by the CDK team to quickly bootstrap CDK (
 
 usage:
 
-```
+```bash
 npx projen new
 ```
 
-```
+```bash
 projen new [PROJECT-TYPE-NAME] [OPTIONS]
 
 Creates a new projen project
@@ -50,4 +50,41 @@ Options:
 Examples:
   projen new awscdk-app-ts         Creates a new project of built-in type "awscdk-app-ts"
   projen new --from projen-vue@^2  Creates a new project from an external module "projen-vue" with the specified version
-  ```
+```
+
+## Excercise
+1. Create a Python CDK App
+
+    ```bash
+    # Create directory for the app
+    mkdir app
+    cd app
+
+    # Generate the project
+    npx projen new awscdk-app-py --no-git
+    ```
+
+2. Explore the project layout.
+3. Deploy the project.
+
+    ```bash
+    source .env/bin/activate
+    npx cdk deploy
+    ```
+
+3. Explore .projenrc.py
+4. Rename the project directory.
+
+    ```bash
+    cd ..
+    mv app my-app
+    cd my-app
+    ``` 
+
+3. Deploy the project again.
+
+    ```bash
+    npx cdk deploy
+    ```
+
+4. Fix it by running `projen`
