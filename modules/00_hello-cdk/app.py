@@ -9,7 +9,7 @@ dev_env = Environment(
 )
 
 app = App()
-MyStack(app, "hello-cdk-dev", env=dev_env)
+stack = MyStack(app, "hello-cdk-dev", env=dev_env)
 # MyStack(app, "hello-cdk-prod", env=prod_env)
 
 app.synth()
