@@ -1,6 +1,7 @@
 # Constructs
 What are Constructs?
-TODO: explain
+
+Constructs are the basic building blocks of CDK apps. A construct represents a "cloud component" and encapsulates everything AWS CloudFormation needs to create the component.
 
 ## Create a simple Construct library
 
