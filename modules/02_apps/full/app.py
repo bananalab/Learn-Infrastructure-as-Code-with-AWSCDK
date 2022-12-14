@@ -8,8 +8,13 @@ dev_env = Environment(
   region=os.getenv('CDK_DEFAULT_REGION')
 )
 
+prod_env = Environment(
+  account=os.getenv('CDK_DEFAULT_ACCOUNT'),
+  region=os.getenv('CDK_DEFAULT_REGION')
+)
+
 app = App()
 MyStack(app, "full-dev", env=dev_env)
-# MyStack(app, "full-prod", env=prod_env)
+MyStack(app, "full-prod", env=prod_env)
 
 app.synth()
