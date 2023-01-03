@@ -15,6 +15,6 @@ prod_env = Environment(
 
 app = App()
 MyStack(app, "full-dev", env=dev_env)
-MyStack(app, "full-prod", env=prod_env)
+#MyStack(app, "full-prod", env=prod_env)
 
 app.synth()

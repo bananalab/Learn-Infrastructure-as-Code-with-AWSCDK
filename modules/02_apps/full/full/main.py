@@ -43,7 +43,10 @@ class MyStack(Stack):
             host_port=80,
             protocol=ecs.Protocol.TCP
           )
-        ]
+        ],
+        logging=ecs.LogDriver.aws_logs(
+          stream_prefix="web"
+        )
     )
 
     service = ecs.FargateService(self, "Service",
